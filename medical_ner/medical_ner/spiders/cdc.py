@@ -1,12 +1,13 @@
 import scrapy
 
 
-class MedicineNetSpider(scrapy.Spider):
-    name = "medicinenet"
+class CDCSpider(scrapy.Spider):
+    name = "cdc"
     procedures = set([])
 
     def start_requests(self):
-        urls = ['https://www.medicinenet.com/procedures_and_tests/alpha_{}.htm'.format(chr(i)) for i in range(97, 123)]
+        urls = ['https://www.cdc.gov/az/{}.html'.format(chr(i)) for i in range(97, 123)]
+        urls.append('https://www.cdc.gov/az/0.html')
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
